@@ -194,13 +194,11 @@ Content-Type: application/json
 
 #### Obtener Información del Usuario Autenticado
 ```bash
-GET /api/auth/me
+GET /api/auth/profile
 Authorization: Bearer {access_token}
 ```
 
-#### Refrescar Token
 ```bash
-POST /api/auth/refresh
 Authorization: Bearer {access_token}
 ```
 
