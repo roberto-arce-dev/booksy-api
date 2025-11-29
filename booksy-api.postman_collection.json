@@ -413,6 +413,90 @@
           }
         }
       ]
+    },
+    {
+      "name": "Libro",
+      "item": [
+        {
+          "name": "Libros por Categoría",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/libro/categoria/{{categoriaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "libro",
+                "categoria",
+                "{{categoriaId}}"
+              ]
+            },
+            "description": "Buscar libros por categoría específica"
+          },
+          "response": []
+        },
+        {
+          "name": "Libros por Autor",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/libro/autor/{{autorId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "libro",
+                "autor",
+                "{{autorId}}"
+              ]
+            },
+            "description": "Obtener todos los libros de un autor"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Libros",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/libro/search/{{termino}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "libro",
+                "search",
+                "{{termino}}"
+              ]
+            },
+            "description": "Buscar libros por título, autor o palabra clave"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints específicos de Libro"
     }
   ],
   "variable": [

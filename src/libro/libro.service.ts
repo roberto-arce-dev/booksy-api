@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { CreateLibroDto } from './dto/create-libro.dto';
 import { UpdateLibroDto } from './dto/update-libro.dto';
 import { Libro, LibroDocument } from './schemas/libro.schema';
@@ -45,5 +45,38 @@ export class LibroService {
     if (!result) {
       throw new NotFoundException(`Libro con ID ${id} no encontrado`);
     }
+  }
+
+  async findByCategoria(categoriaId: string): Promise<Libro[]> {
+    const libros = await this.libroModel
+      .find({ categoria: new Types.ObjectId(categoriaId) })
+      .populate('autor', 'nombre biografia')
+      .populate('categoria', 'nombre descripcion')
+      .sort({ titulo: 1 });
+    return libros;
+  }
+
+  async findByAutor(autorId: string): Promise<Libro[]> {
+    const libros = await this.libroModel
+      .find({ autor: new Types.ObjectId(autorId) })
+      .populate('autor', 'nombre biografia')
+      .populate('categoria', 'nombre descripcion')
+      .sort({ titulo: 1 });
+    return libros;
+  }
+
+  async buscarLibros(termino: string): Promise<Libro[]> {
+    const libros = await this.libroModel
+      .find({
+        $or: [
+          { titulo: { $regex: termino, $options: 'i' } },
+          { descripcion: { $regex: termino, $options: 'i' } },
+          { isbn: { $regex: termino, $options: 'i' } }
+        ]
+      })
+      .populate('autor', 'nombre biografia')
+      .populate('categoria', 'nombre descripcion')
+      .sort({ titulo: 1 });
+    return libros;
   }
 }

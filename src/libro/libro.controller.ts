@@ -102,6 +102,33 @@ export class LibroController {
     return { success: true, data, total: data.length };
   }
 
+  @Get('categoria/:categoriaId')
+  @ApiOperation({ summary: 'Buscar libros por categoría' })
+  @ApiParam({ name: 'categoriaId', description: 'ID de la categoría' })
+  @ApiResponse({ status: 200, description: 'Lista de libros por categoría' })
+  async findByCategoria(@Param('categoriaId') categoriaId: string) {
+    const data = await this.libroService.findByCategoria(categoriaId);
+    return { success: true, data, total: data.length };
+  }
+
+  @Get('autor/:autorId')
+  @ApiOperation({ summary: 'Buscar libros por autor' })
+  @ApiParam({ name: 'autorId', description: 'ID del autor' })
+  @ApiResponse({ status: 200, description: 'Lista de libros del autor' })
+  async findByAutor(@Param('autorId') autorId: string) {
+    const data = await this.libroService.findByAutor(autorId);
+    return { success: true, data, total: data.length };
+  }
+
+  @Get('search/:termino')
+  @ApiOperation({ summary: 'Buscar libros por término' })
+  @ApiParam({ name: 'termino', description: 'Término de búsqueda' })
+  @ApiResponse({ status: 200, description: 'Resultados de la búsqueda' })
+  async buscarLibros(@Param('termino') termino: string) {
+    const data = await this.libroService.buscarLibros(termino);
+    return { success: true, data, total: data.length };
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Obtener Libro por ID' })
   @ApiParam({ name: 'id', description: 'ID del Libro' })
