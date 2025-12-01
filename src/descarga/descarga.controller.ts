@@ -34,13 +34,23 @@ export class DescargaController {
   @ApiResponse({ status: 201, description: 'Descarga creado exitosamente' })
   @ApiResponse({ status: 400, description: 'Datos inválidos' })
   @ApiResponse({ status: 401, description: 'No autorizado' })
-  async create(@Body() createDescargaDto: CreateDescargaDto) {
-    const data = await this.descargaService.create(createDescargaDto);
+  async create(@Body() createDescargaDto: CreateDescargaDto, @Req() req: any) {
+    const userId = req.user?.userId;
+    const data = await this.descargaService.create(createDescargaDto, userId);
     return {
       success: true,
       message: 'Descarga creado exitosamente',
       data,
     };
+  }
+
+  @Get('mis-descargas')
+  @ApiOperation({ summary: 'Obtener descargas del usuario autenticado' })
+  @ApiResponse({ status: 200, description: 'Lista de descargas del usuario' })
+  async findMyDescargas(@Req() req: any) {
+    const userId = req.user.userId;
+    const data = await this.descargaService.findMyDescargas(userId);
+    return { success: true, data, total: data.length };
   }
 
   @Post(':id/upload-image')
