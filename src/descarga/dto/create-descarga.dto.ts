@@ -1,36 +1,28 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsMongoId, IsOptional } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateDescargaDto {
   @ApiProperty({
-    example: 'Nombre del Descarga',
-    description: 'Nombre del Descarga',
+    example: '6640c6f8a3d2b3e4f8c12345',
+    description: 'ID del libro a descargar/comprar',
   })
-  @IsNotEmpty()
-  @IsString()
-  nombre: string;
+  @IsMongoId()
+  libro: string;
 
   @ApiPropertyOptional({
-    example: 'Descripción del Descarga',
-    description: 'Descripción opcional',
+    example: '663fa2d9b5e4c1a2d3e98765',
+    description: 'ID del cliente (solo para operaciones administrativas)',
   })
   @IsOptional()
-  @IsString()
-  descripcion?: string;
+  @IsMongoId()
+  cliente?: string;
 
   @ApiPropertyOptional({
-    example: 'https://example.com/imagen.jpg',
-    description: 'URL de la imagen',
+    enum: ['pdf', 'epub', 'mobi'],
+    default: 'pdf',
+    description: 'Formato solicitado por el cliente',
   })
   @IsOptional()
-  @IsString()
-  imagen?: string;
-
-  @ApiPropertyOptional({
-    example: 'https://example.com/thumbnail.jpg',
-    description: 'URL del thumbnail',
-  })
-  @IsOptional()
-  @IsString()
-  imagenThumbnail?: string;
+  @IsEnum(['pdf', 'epub', 'mobi'])
+  formato?: string;
 }

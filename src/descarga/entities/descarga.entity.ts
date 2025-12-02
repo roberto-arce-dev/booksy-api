@@ -1,7 +1,9 @@
 export class Descarga {
-  id: number;
-  nombre: string;
-  descripcion?: string;
+  id: string;
+  libro: string;
+  cliente: string;
+  formato?: 'pdf' | 'epub' | 'mobi';
+  fechaDescarga?: Date;
   imagen?: string;
   imagenThumbnail?: string;
   createdAt: Date;

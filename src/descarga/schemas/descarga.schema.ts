@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
+import { ClienteProfile } from '../../cliente-profile/schemas/cliente-profile.schema';
 
 export type DescargaDocument = Descarga & Document;
 
@@ -8,7 +9,7 @@ export class Descarga {
   @Prop({ type: Types.ObjectId, ref: 'Libro', required: true })
   libro: Types.ObjectId;
 
-  @Prop({ type: Types.ObjectId, ref: 'Cliente', required: true })
+  @Prop({ type: Types.ObjectId, ref: ClienteProfile.name, required: true })
   cliente: Types.ObjectId;
 
   @Prop({ default: Date.now })
