@@ -504,6 +504,36 @@
       "key": "baseUrl",
       "value": "http://localhost:3007/api",
       "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "filename",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "categoriaId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "autorId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "termino",
+      "value": "",
+      "type": "string"
     }
   ]
 }
